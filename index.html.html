@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>De Dani para Dani 💌 — Reino Unido</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2c2a2a; --paper:#fffdf8; --shadow:0 12px 28px rgba(0,0,0,.16);
+  --accent:#ff5d8f; --accent-dark:#e64f80;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--ink);background:#fff5fb}
+.wrap{width:min(98vw,1100px);margin-inline:auto;padding:16px 12px 40px;text-align:center}
+h1{font-family:"Playfair Display",serif;font-size:clamp(28px,5vw,56px);margin:10px 0 4px}
+.subtitle{opacity:.85;margin:0 0 16px}
+
+/* --- HERO con tu imagen --- */
+.hero{
+  position:relative;
+  width:100%;
+  height:clamp(280px,48vw,520px);
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.12);
+  background-image:url('https://drive.google.com/thumbnail?id=1XkdXbpUbXjoVTIsJoczdJBXnVJ24IJQw&sz=w1600');
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+.cta{position:absolute;left:50%;bottom:16px;translate:-50% 0;background:var(--accent);color:#fff;
+     font-weight:800;border-radius:999px;padding:12px 18px;display:inline-flex;gap:8px;align-items:center;
+     box-shadow:var(--shadow);cursor:pointer}
+.cta .spark{animation:tw 1.4s ease-in-out infinite}
+@keyframes tw{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.15);opacity:1}}
+
+/* --- SOBRE GRANDE --- */
+.stage{position:relative;margin:24px auto 0;width:min(96vw,960px);aspect-ratio:4/3;perspective:1800px;user-select:none}
+.envelope{position:absolute;inset:0;transform-style:preserve-3d;filter:drop-shadow(0 22px 36px rgba(0,0,0,.18))}
+.back{position:absolute;inset:0;background:linear-gradient(180deg,var(--accent) 0%,var(--accent-dark) 100%);border-radius:24px}
+.flap{position:absolute;left:6.5%;right:6.5%;top:-1%;height:58%;transform-origin:50% 100%;
+      background:linear-gradient(180deg,#ff7aa7 0%,var(--accent) 100%);
+      clip-path:polygon(50% 0%,100% 100%,0 100%);border-radius:16px 16px 24px 24px/26px 26px 24px 24px;
+      transition:transform 1s cubic-bezier(.15,.8,.12,1)}
+.front{position:absolute;inset:0;pointer-events:none}
+.front .tri{position:absolute;bottom:0;width:50%;height:58%;background:#ff86b5;clip-path:polygon(0 0,100% 100%,0 100%)}
+.front .right{right:0;transform:scaleX(-1)}
+
+.letter{position:absolute;left:5.5%;right:5.5%;bottom:5.5%;top:18%;
+        background:var(--paper);border-radius:20px;box-shadow:var(--shadow);
+        padding:clamp(18px,2.2vw,28px);transform:translateY(16%);
+        transition:transform 1s cubic-bezier(.2,.8,.16,1) .05s;z-index:2;display:grid}
+.letter h2{font-family:"Playfair Display",serif;margin:0 0 10px;font-size:clamp(22px,3.2vw,34px);text-align:left}
+.inner{max-height:min(60vh,560px);overflow:auto;padding-right:6px;text-align:left}
+.letter p{line-height:1.7;margin:0 0 14px}
+.signature{font-weight:700;margin-top:6px}
+
+/* Estado abierto */
+.open .flap{transform:rotateX(170deg)}
+.open .letter{transform:translateY(-10%)}
+
+/* CHISPEO + CONFETI */
+#magic{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.sparkle{position:absolute;font-size:18px;animation:rise 1.8s linear forwards;opacity:.9}
+@keyframes rise{0%{transform:translateY(0) scale(.9)}100%{transform:translateY(-120vh) scale(1.4);opacity:0}}
+.conf{position:absolute;width:8px;height:14px;border-radius:2px;animation:fall 1.9s ease-in forwards}
+@keyframes fall{0%{transform:translateY(-20vh) rotate(0)}100%{transform:translateY(120vh) rotate(340deg);opacity:0}}
+
+.controls{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+button{appearance:none;border:0;cursor:pointer;background:var(--accent);color:white;font-weight:800;
+       padding:12px 18px;border-radius:999px;box-shadow:var(--shadow)}
+button.ghost{background:transparent;color:var(--accent-dark);outline:2px solid var(--accent)}
+button:hover{filter:brightness(1.05)}
+
+@media (max-width:640px){
+  .inner{max-height:56vh}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>De Dani para Dani 💌</h1>
+  <p class="subtitle">Toca la imagen o el botón para abrir tu carta.</p>
+
+  <!-- HERO con tu imagen de Drive -->
+  <div class="hero" id="hero">
+    <div class="cta" id="cta"><span class="spark">✨</span> Toca aquí <span class="spark">✨</span></div>
+  </div>
+
+  <!-- SOBRE GRANDE -->
+  <div class="stage">
+    <div class="envelope" id="envelope" role="button" aria-expanded="false" aria-controls="letter">
+      <div class="back"></div>
+      <div class="flap"></div>
+      <div class="letter" id="letter">
+        <h2>Querido Dani,</h2>
+        <div class="inner">
+          <p>Perdón por no haber estado en tu fiesta. La verdad es que estos días han sido un poco difíciles para mí, entre distintas situaciones personales y también económicas. Aun así, no quería dejar pasar tu día como si nada, porque eres alguien muy importante para mí y quería encontrar una manera de estar presente, aunque fuera con unas palabras.</p>
+          <p>Quise escribirte esta cartita porque creo que las palabras tienen el poder de acompañarnos incluso en la distancia. Aún recuerdo mi Erasmus como una de las mejores experiencias que me han pasado en la vida. Fui tan, pero tan feliz en aquel tiempo, que me emociona muchísimo pensar que ahora seas tú quien va a vivir esta aventura. Estoy convencida de que volverás siendo un Dani más maduro, más fuerte y con una mirada distinta sobre el mundo. El Erasmus no solo nos regala viajes y recuerdos, también nos cambia por dentro, nos enseña a valorar lo que tenemos y nos abre puertas que nunca imaginamos.</p>
+          <p>Quiero que sepas que confío en ti, en tu capacidad de adaptarte, de superar retos y de disfrutar de cada instante. Seguramente habrá momentos difíciles, porque toda experiencia transformadora los tiene, pero también estoy segura de que tendrás instantes de felicidad inmensa, de esos que se quedan guardados para siempre.</p>
+          <p>Te deseo de corazón todo lo mejor en esta nueva etapa. Estoy feliz de que te toque vivirla, porque pocas personas conozco que se lo merezcan tanto como tú. Me siento muy afortunada de haberte conocido, de haber compartido contigo risas, conversaciones y momentos que se quedan grabados. Gracias por ser como eres, por tu amistad, por tu energía y por todo lo que aportas a quienes te rodean.</p>
+          <p>Recuerda siempre que cuentas conmigo, estés donde estés. Te quiero mucho y me llena de alegría saber que este será solo el inicio de una etapa maravillosa para ti.</p>
+          <p class="signature">Con todo mi cariño,<br>— Dani (la Dani más vieja)</p>
+        </div>
+      </div>
+      <div class="front">
+        <div class="tri left"></div>
+        <div class="tri right"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="share" class="ghost">Compartir enlace</button>
+    <button id="color" class="ghost">Cambiar color</button>
+  </div>
+</div>
+
+<div id="magic"></div>
+
+<script>
+const env   = document.getElementById('envelope');
+const hero  = document.getElementById('hero');
+const cta   = document.getElementById('cta');
+const magic = document.getElementById('magic');
+const shareBtn = document.getElementById('share');
+const colorBtn = document.getElementById('color');
+
+function openMagic(){
+  if(!env.classList.contains('open')){
+    env.classList.add('open');
+    burstSparkles();
+    rainConfetti();
+  }
+}
+hero.addEventListener('click', openMagic);
+cta.addEventListener('click', e => { e.stopPropagation(); openMagic(); });
+
+function burstSparkles(){ for(let i=0;i<18;i++) setTimeout(spawnSparkle, i*80); }
+function spawnSparkle(){
+  const s = document.createElement('div'); s.className='sparkle';
+  s.textContent = ['✨','🌟','💖','💫'][Math.floor(Math.random()*4)];
+  s.style.left = (10 + Math.random()*80) + 'vw';
+  s.style.bottom = '0px';
+  s.style.fontSize = (18 + Math.random()*16) + 'px';
+  magic.appendChild(s); s.addEventListener('animationend', ()=> s.remove());
+}
+function rainConfetti(){
+  const colors = ['#ff5d8f','#6c8cff','#6dd3a0','#f7b267','#b381f0'];
+  for(let i=0;i<70;i++){
+    const c = document.createElement('div'); c.className='conf';
+    c.style.left = Math.random()*100 + 'vw';
+    c.style.top  = (-Math.random()*40) + 'vh';
+    c.style.background = colors[i % colors.length];
+    c.style.animationDuration = (1.6 + Math.random()*0.9) + 's';
+    magic.appendChild(c); c.addEventListener('animationend', ()=> c.remove());
+  }
+}
+
+shareBtn.addEventListener('click', async()=>{
+  try{ await navigator.clipboard.writeText(location.href);
+       shareBtn.textContent='¡Enlace copiado!'; setTimeout(()=>shareBtn.textContent='Compartir enlace',2000);
+  }catch(e){ alert('Copia este enlace:\\n'+location.href); }
+});
+const palettes = [
+  ['#ff5d8f','#e64f80'], ['#6c8cff','#556ee6'],
+  ['#6dd3a0','#53b586'], ['#f7b267','#ea8a4b'], ['#b381f0','#915cd8']
+];
+let idx=0;
+colorBtn.addEventListener('click',()=>{
+  idx=(idx+1)%palettes.length; const [a,b]=palettes[idx];
+  document.documentElement.style.setProperty('--accent',a);
+  document.documentElement.style.setProperty('--accent-dark',b);
+});
+</script>
+</body>
+</html>
+
